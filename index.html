@@ -1,0 +1,80 @@
+<html> 
+    <head> 
+        <title>there are dragons...</title> 
+        <style type="text/css"> 
+            canvas {
+                border: 1px solid black;
+            }
+        </style>
+		<script src="src/turtle.js"></script> 
+        <script type="text/javascript"> 
+            var dragon = function() {
+                var str = '';
+ 
+                function invertAndReverse() {
+                    var al = str.length - 1;
+ 
+                    while(al--) {
+                        str += (str[al] === 'R' ? 'L' : 'R');
+                    }
+                }
+ 
+                return function(x) {
+                    str = 'R';
+                    while(x--) {
+                        str += 'R';
+                        invertAndReverse();
+                    }
+                    return str;
+                }
+            }();
+            
+            var drawDragon = function() {
+                var ctx,
+                definition = '',
+                turtle
+                distance = 2;
+ 
+                function r() {
+                    turtle.fd(distance).rt(90).fd(distance);
+                }
+ 
+                function l() {
+                    turtle.fd(distance).lt(90).fd(distance);
+                }
+ 
+                function start() {
+                    var i=0,defl = definition.length;
+                    turtle.pd();
+                    for(;i<defl;) {
+                        if(definition[i++] === 'R') {
+                            r();
+                        } else {
+                            l();
+                        }
+                    }
+                    turtle.pu();
+                }
+ 
+                return function(c, def, dist) {
+                    ctx = c;
+                    turtle = new Turtle(ctx);
+                    definition = def;
+                    distance = dist;
+                    start();
+                }
+            }();
+            
+            function draw(it, dist) {
+                var canvas = document.getElementById('dragoncanvas');
+                if (canvas.getContext) {
+                    var ctx = canvas.getContext('2d');
+                    drawDragon(ctx, dragon(it),dist);
+                }
+            }
+        </script> 
+    </head> 
+    <body onload="draw(12,2)"> 
+        <canvas id="dragoncanvas" width="800" height="800"></canvas> 
+    </body> 
+</html>
