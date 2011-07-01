@@ -1,0 +1,27 @@
+Documentation
+
+- Create a canvas
+    Example:
+    <canvas id="mycanvas" width="800" height="800"></canvas>
+
+- Create a Turtle
+    Example:
+    var canvas = document.getElementById('mycanvas');
+    if (canvas.getContext) {
+        turtle = new Turtle(canvas.getContext('2d'));
+    }
+    
+- Start drawing
+    Example:
+    turtle.pd().fd(10).lt(45).fd(10).pu();
+    
+- Implemented commands for now:
+    fd(x): move (and paint if pen is down) forward x pixel
+    lt(x): turn left by x degrees,
+    rt(x): turn right by x degrees,
+    pu(): penUp, means that the turtle won't draw,
+    pd(): penDown, means that the turtle will draw
+    
+- planned:
+    cp(color): change color of pen,
+    bd(x): move backward (fd(-x))
