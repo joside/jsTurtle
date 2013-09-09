@@ -8,7 +8,7 @@
         </style>
 		<script src="src/turtle.js"></script> 
         <script type="text/javascript"> 
-            var dragon = function() {
+            var dragon = (function() {
                 var str = '';
  
                 function invertAndReverse() {
@@ -27,13 +27,13 @@
                     }
                     return str;
                 }
-            }();
+            }());
             
-            var drawDragon = function() {
+            var drawDragon = (function() {
                 var ctx,
-                definition = '',
-                turtle
-                distance = 2;
+                    definition = '',
+                    turtle,
+                    distance = 2;
  
                 function r() {
                     turtle.fd(distance).rt(90).fd(distance);
@@ -62,8 +62,8 @@
                     definition = def;
                     distance = dist;
                     start();
-                }
-            }();
+                };
+            }());
             
             function draw(it, dist) {
                 var canvas = document.getElementById('dragoncanvas');
